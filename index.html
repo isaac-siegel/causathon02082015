@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <title>My Lists</title>
+
+
+    <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+    <!-- AngularJS -->
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <!--&lt;!&ndash; AngularFire &ndash;&gt;-->
+    <!--<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>-->
+
+    <!--Custom Assets-->
+    <script src="js/queries.js"></script>
+
+    <script src="controllers/inputFormController.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/editFields.js"></script>
+
+
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" src="main.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body ng-app="listView">
+
+<!-- First and Last name Input fields-->
+<div class = "search_bar">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="input-group" id="first_name" >
+                <input type="text" class="form-control" id="FirstNameInput" placeholder="First name">
+
+            </div><!-- /input-group -->
+
+        </div>
+        <div class="col-md-3">
+            <div class="input-group" id= "last_name">
+                <input type="text" class="form-control" id="LastNameInput" placeholder="Last name">
+
+            </div><!-- /input-group -->
+
+
+        </div>
+        <div class="col-md-3">
+             <span class="input-group-btn">
+				        <button class="btn btn-default" id="searchButton" type="button">Search!</button>
+				      </span>
+        </div>
+
+
+    </div>
+
+    <div class="row" >
+        <div class="col-md-6">
+
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-md-6">
+
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+</div>
+</div>
+</div>
+
+
+
+<!--<button  >CLICK ME SEARCH</button>-->
+<div id="controllerID" ng-controller="itemsController">
+
+    <!--<button id="selectButton" >SELECT</button>-->
+
+    <div class="animate-switch-container"
+         ng-switch on="selection">
+
+        <!--MODAL-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="editFieldLabel">Placeholder</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group input-group-lg">
+                            <input type="text" id ="editContent" class="form-control" aria-describedby="sizing-addon1">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--PATIENT INFO/DEMOGRAPHICS VIEW-->
+        <div class="animate-switch" ng-switch-when="patientInfoView">
+            {{selectedPatient.FirstName}}
+
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="jumbotron" id="huge">
+                        <h1>{{selectedPatient.FirstAndLastName}}</h1>
+                    </div>
+
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Name</h3>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" >First:</span>
+                        <input type="text" class="form-control" id="firstName" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Middle:</span>
+                        <input type="text" class="form-control" id="middleName" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Last:</span>
+                        <input type="text" class="form-control" id="lastName" aria-describedby="sizing-addon2">
+                    </div>
+
+
+                    <!--First: {{selectedPatient.FirstName}} <br>-->
+                    <!--Middle: {{selectedPatient.MiddleName}} <br>-->
+                    <!--Last: {{selectedPatient.LastName}} <br>-->
+
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <h3>Contact</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Home:</span>
+                        <input type="text" class="form-control" id="home" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Cell:</span>
+                        <input type="text" class="form-control" id="cell" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Email:</span>
+                        <input type="text" class="form-control" id="email" aria-describedby="sizing-addon2">
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <h3>Emergency Contact</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Name:</span>
+                        <input type="text" class="form-control" id="eName" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Relationship:</span>
+                        <input type="text" class="form-control" id="relationship" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Phone:</span>
+                        <input type="text" class="form-control" id="ePhone" aria-describedby="sizing-addon2">
+                    </div>
+
+
+                </div>
+                <div class="col-md-3">
+                    <h3>Hospital</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Name:</span>
+                        <input type="text" class="form-control" id="HospitalName" onclick="edit('HospitalName')" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" >City:</span>
+                        <input type="text" class="form-control" id="HospitalCity" onclick="edit('HospitalCity')" aria-describedby="sizing-addon2">
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+            <!--Second row-->
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Date Of Birth</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Date:</span>
+                        <input type="text" class="form-control" id="DOB" aria-describedby="sizing-addon2">
+                    </div>
+
+
+
+                    <h3>Gender</h3>
+                    <div class="input-group">
+                        <span class="input-group-addon" >Gender:</span>
+                        <input type="text" class="form-control" id="gender" aria-describedby="sizing-addon2">
+                    </div>
+
+                    <br>
+
+
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <h3>Address</h3>
+
+                    First: {{selectedPatient.Address1}} <br>
+                    City: {{selectedPatient.City}} <br>
+                    State: {{selectedPatient.State}} <br>
+                    ZipCode: {{selectedPatient.ZipCode}} <br>
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <h3>Diagnosis</h3>
+
+                    First: {{FirstName}} <br>
+                    Middle: {{MiddleName}} <br>
+                    Last: {{LastName}} <br>
+
+                </div>
+                <div class="col-md-3">
+                    <h3>Doctor</h3>
+
+                    First: {{FirstName}} <br>
+                    Middle: {{MiddleName}} <br>
+                    Last: {{LastName}} <br>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <!--SEARCH RESULTS DISPLAYED HERE-->
+        <div class="animate-switch" ng-switch-default>
+
+
+            <!-- Table!-->
+
+            <div class= "container">
+
+                <table class = "table table-striped">
+                    <thead class="table-head">
+                    <td class = "col-xs-3" id="t-element"> Last Name </td>
+                    <td class = "col-xs-3"> First Name </td>
+                    <td class = "col-xs-3"> DOB</td>
+                    <!--<td class = "col-xs-3"> Mother's name </td>-->
+                    </thead>
+                    <tbody id="client_table" ng-repeat="patient in patientSearchResults" ng-click="switchToPatientInfoView(patient.oid)">
+                    <tr>
+                        <td class = "col-xs-3"> {{patient.LastName}} </td>
+                        <td class = "col-xs-3"> {{patient.FirstName}} </td>
+                        <td class = "col-xs-3"> {{patient.DOB}}</td>
+                        <!--<td class = "col-xs-3"> {{Mother's name </td>-->
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!--<div  ng-repeat="patient in patientSearchResults" >-->
+
+                <!--<div ng-click="switchToPatientInfoView(patient.oid)">{{patient.LastName}}    {{patient.FirstName}} {{patient.oid}}-->
+                <!--</div>-->
+
+
+
+            <!--</div>-->
+
+        </div>
+    </div>
+
+    <br>
+
+</div>
+
+
+<!--MODAL-->
+<!-- Modal -->
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">-->
+    <!--Launch demo modal-->
+<!--</button>-->
+
+</body>
+</html>

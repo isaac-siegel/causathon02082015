@@ -1,0 +1,27 @@
+
+<!-- First and Last name Input fields floating next to each other-->
+
+
+.search_bar{
+	width:100%;
+	display: inline-block;
+
+}
+
+#first_name{
+	display: inline-block;
+	width:49%;
+	float:left;
+
+}
+
+#last_name{
+	display:inline-block;
+	width:49%;
+	margin-top: -68px;
+	float:right;
+
+}
+
+<!-- Output fields for patient demographics-->
+
