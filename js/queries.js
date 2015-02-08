@@ -40,6 +40,7 @@ function countPatients(searchParameter, requestedParameter){
 function countByZip(){
 
     var arr = $("#zipQueryInput").val().split(" ");
+    console.log(arr)
 
     var total = 0;
     for (var i = 0; i < arr.length; i++){
@@ -54,7 +55,7 @@ function countByZip(){
 
             }
             console.log("total: "+ total)
-                                console.log("length" +arr.length + "i "+ i)
+                                console.log("length " +arr.length + "||| i "+ i)
             if (i == arr.length)
                 swal("Zip Code Results:", total + " patients found.", "success");
         })
@@ -89,15 +90,24 @@ function countByNewClients(date1, date2){
             console.log(count);
 
         });
+        swal("New Clients Count",count + " total in timeframe.","success")
 
         //im so sorry
 
-        //if ((patientDate >= date2 && patientDate <= date1) || (patientDate <= date2 && patientDate >= date1 )){
 
-        //}
 
     })
 
+
+
+
+}
+
+
+function countByDate(){
+    var date1 = parseInt($("#dateQueryInput1").val());
+    var date2 = parseInt($("#dateQueryInput2").val());
+    countByNewClients(date1,date2)
 
 
 

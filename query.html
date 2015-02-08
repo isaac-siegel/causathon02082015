@@ -29,21 +29,51 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" src="main.css">
+    <link rel="stylesheet" src="css/custom.css">
+
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
+
+
+
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-3" style="test-align: center"></div>
+
+    <div class="col-lg-3" style="test-align: center">
+        <div class="jumbotron" >
+            <h1>ZipQuery</h1>
+            <p>Enter Zip Codes for a user count</p>
+        </div>
+
         <div class="input-group">
       <span class="input-group-btn">
         <button class="btn btn-default" onclick="countByZip()" type="button">Count</button>
       </span>
             <input id="zipQueryInput" type="text" class="form-control" placeholder="List of Zip Codes ex: 90505 30502">
         </div><!-- /input-group -->
+
+         </div>
+
+    <div class="col-lg-3" style="test-align: center">
+        <div class="jumbotron" >
+            <h1>DateQuery</h1>
+            <p>Enter time range for a user count</p>
+        </div>
+        <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" onclick="countByDate()" type="button">Count</button>
+      </span>
+            <input id="dateQueryInput1" type="text" class="form-control" placeholder="Enter a date">
+            <input id="dateQueryInput2" type="text" class="form-control" placeholder="Enter a date">
+
+        </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
+    <div class="col-lg-3" style="test-align: center"></div>
+
 
 </div><!-- /.row -->
 

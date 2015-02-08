@@ -144,7 +144,7 @@ function search(searchParameter, searchInput, callback2){
     console.log("Callback2"+callback2)
 
 
-    patientsRef.equalTo(searchInput).once("value", function(snapshot) {
+    patientsRef.orderByChild(searchParameter).equalTo(searchInput).once("value", function(snapshot) {
 
 //        console.log(snapshot.val());
 //        console.log(Object.keys(snapshot.val()))
@@ -240,7 +240,6 @@ function getPatientInfo(patientOID, callback){
 }
 
 function getAllPatients(callback){
-    console.log("yjyj")
     patientsRef.orderByChild(CREATEDDATE).once("value", function(snapshot) {
 
 
@@ -290,12 +289,12 @@ function generateZip(){
 
 //firstName, lastName, middleName, gender, zip,
 //dateCreated, eName, ePhone, eRelation, hospitalName, diagnosis, dStatus, dDate,homePhone,cellPhone,email,hospitalCity,dob
-function createDummy(x){
+function createDummy(x, zip){
 
     var names = [ "Zack ", "Mike ", "Elliot ", "Arushi ", "Isaac ", "Chris ", "David ", "Angie ", "Reece ", "Charles ", "Carl ", "Joe ", "Peter ", "Jacqueline ", "Stephanie ", "Sean ", "Cheston ", "Jake ", "Ryan ", "Riley ", "Tom ", "Cameron ", "Jennifer ", "Brad ", "Stuart ", "George ", "Julia ", "Tina ", "Ted ", "Marshall ", "Lily ", "Barney ", "Robin ", "Rachel ", "Monica ", "Chandler ", "Joey ", "Pheobe ", "Ross ", "Gunther ", "Susan ", "Sarah ", "Lia"];
     for (var i = 0; i< x;i++) {
-        addPatientToDB(names[Math.floor(Math.random() * 6) + 1], names[Math.floor(Math.random() * 6) + 1], names[Math.floor(Math.random() * 6) + 1], "M", 90502+ Math.floor(Math.random() * 6) + 1,
-            "", names[Math.floor(Math.random() * 6) + 1], 3109383828, "Brother", "Little comp of mary", "Tumor", "Newly Diagnosed", new Date(),310303033,302340404,"john@appleseed.com","Santa Monica","01012014");
+        addPatientToDB(names[Math.floor(Math.random() * 6) + 1], names[Math.floor(Math.random() * 6) + 1], names[Math.floor(Math.random() * 6) + 1], "M", zip,
+            "", names[Math.floor(Math.random() * 6) + 1], 3109383828, "Brother", "Little comp of mary", "Tumor", "Newly Diagnosed", 201501011111,310303033,302340404,"john@appleseed.com","Santa Monica","01012014");
 
 
     }
